@@ -1,0 +1,30 @@
+{
+  "name": "typeorm-fishery-jest",
+  "version": "1.0.0",
+  "description": "Example of using fishery+typeorm with jest\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "ts-node src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
+  "author": "agoes <agoes.aswari@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.4.0",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.6",
+    "typeorm": "0.3.6"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.2.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.10",
+    "eslint": "^8.14.0",
+    "fishery": "^2.2.2",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "10.7.0",
+    "typescript": "^4.6.4"
+  }
+}
