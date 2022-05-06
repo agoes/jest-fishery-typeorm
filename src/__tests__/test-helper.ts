@@ -3,6 +3,7 @@ import { TestDataSource } from "../data-source";
 export class TestHelper {
   private static instance: TestHelper;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
   public static getInstance(): TestHelper {
