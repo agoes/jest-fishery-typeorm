@@ -1,8 +1,8 @@
 import faker from "@faker-js/faker"
 import { Factory } from "fishery"
-import { TestDataSource } from "../../data-source"
 import { Task } from "../../entity/task"
 import { TaskStatuses } from "../../enums/index."
+import { taskRepository } from "../../repository"
 
 class TaskFactory extends Factory<Task> {
   withStatus(status: TaskStatuses) {
@@ -13,12 +13,13 @@ class TaskFactory extends Factory<Task> {
 }
 
 export const taskFactory = TaskFactory.define(({ onCreate, sequence }) => {
-  const task = new Task();
-  task.id = sequence
-  task.title = faker.word.verb()
-  task.status = TaskStatuses.TODO
+  const task = {
+    id: sequence,
+    title: faker.word.verb(),
+    status: TaskStatuses.TODO,
+  } as Task;
 
-  onCreate(task => TestDataSource.manager.save(task))
+  onCreate(() => taskRepository.save(task))
 
   return task;
 })

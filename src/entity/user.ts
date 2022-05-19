@@ -15,5 +15,5 @@ export class User {
   lastName: string;
 
   @OneToMany(() => Task, (task: Task) => task.user)
-  tasks: Task[];
+  tasks?: Task[];
 }

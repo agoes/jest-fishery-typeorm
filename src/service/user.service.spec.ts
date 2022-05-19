@@ -6,15 +6,14 @@ import { taskFactory } from '../__tests__/factory/task.factory';
 import { TaskStatuses } from '../enums/index.';
 import { Task } from '../entity/task';
 import { User } from '../entity/user';
+import { userRepository } from '../repository';
 
 describe('UserService', () => {
   let service: UserService;
 
   beforeAll(async () => {
     await TestHelper.getInstance().setUp();
-    service = new UserService(
-      TestDataSource.manager.getRepository<User>(User),
-    );
+    service = new UserService(userRepository);
   });
 
   afterEach(async () => {
@@ -50,12 +49,18 @@ describe('UserService', () => {
 
     it('return User with tasks if any', async () => {
       const tasks = await taskFactory.withStatus(TaskStatuses.IN_PROGRESS).createList(2);
-      const user = await userFactory
+      const userWithTasks = await userFactory
         .associations({ tasks })
         .create();
-      const actual = await service.getByID(user.id);
-      expect(actual).toBeInstanceOf(User);
-      expect(actual.tasks).toEqual(tasks);
+      const userWithoutTasks = await userFactory.create();
+
+      const actualWithTasks = await service.getByID(userWithTasks.id);
+      expect(actualWithTasks).toBeInstanceOf(User);
+      expect(actualWithTasks.tasks).toEqual(tasks);
+
+      const actualWithoutTasks = await service.getByID(userWithoutTasks.id);
+      expect(actualWithoutTasks).toBeInstanceOf(User);
+      expect(actualWithoutTasks.tasks).toEqual(0);
     });
 
     it('return null on no result', async () => {

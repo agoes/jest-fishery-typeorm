@@ -13,7 +13,8 @@ export class TestHelper {
   }
 
   async setUp(): Promise<void> {
-    if (!TestDataSource.isInitialized) {
+    const initialized = TestDataSource.isInitialized;
+    if (!initialized) {
       await TestDataSource.initialize();
     }
   }
