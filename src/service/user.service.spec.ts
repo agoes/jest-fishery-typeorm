@@ -1,4 +1,3 @@
-import { TestDataSource } from '../data-source';
 import { TestHelper } from '../__tests__/test-helper';
 import { userFactory } from '../__tests__/factory/user.factory';
 import { UserService } from './user.service';
@@ -60,7 +59,7 @@ describe('UserService', () => {
 
       const actualWithoutTasks = await service.getByID(userWithoutTasks.id);
       expect(actualWithoutTasks).toBeInstanceOf(User);
-      expect(actualWithoutTasks.tasks).toEqual(0);
+      expect(actualWithoutTasks.tasks).toEqual([]);
     });
 
     it('return null on no result', async () => {
